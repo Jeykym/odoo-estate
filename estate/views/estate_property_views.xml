@@ -71,6 +71,8 @@
                         <page string="Other Info">
                             <group>
                                 <field name="property_type_id" />
+                                <field name="seller_id" />
+                                <field name="buyer_id" />
                             </group>
                         </page>
                     </notebook>
