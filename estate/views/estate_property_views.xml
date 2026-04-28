@@ -55,8 +55,6 @@
                             <field name="selling_price" />
                         </group>
                     </group>
-                </sheet>
-                <sheet>
                     <notebook>
                         <page string="Description">
                             <group>
@@ -68,6 +66,11 @@
                                 <field name="garden" />
                                 <field name="garden_area" string="Garden Area (sqm)" />
                                 <field name="garden_orientation"/>
+                            </group>
+                        </page>
+                        <page string="Other Info">
+                            <group>
+                                <field name="property_type_id" />
                             </group>
                         </page>
                     </notebook>
