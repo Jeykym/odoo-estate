@@ -27,8 +27,6 @@ class EstateProperty(models.Model):
     state = fields.Selection(
         selection=[
             ('new', 'New'),
-            ('offer_received', 'Offer Received'),
-            ('offer_accepted', 'Offer Accepted'),
             ('sold', 'Sold'),
             ('cancelled', 'Cancelled')
         ],
@@ -57,4 +55,17 @@ class EstateProperty(models.Model):
         else:
             self.garden_area = 0
             self.garden_orientation = False
+
+    def action_sold(self):
+        if self.state != 'cancelled':
+            self.state = 'sold'
+            return True
+        else:
+            return False
     
+    def action_cancel(self):
+        if self.state != 'sold':
+            self.state = 'cancelled'
+            return True
+        else:
+            return False
