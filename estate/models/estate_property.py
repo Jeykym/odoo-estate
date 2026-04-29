@@ -21,7 +21,7 @@ class EstateProperty(models.Model):
     garden_orientation = fields.Selection(
         selection=[('north', 'North'), ('south', 'South'), ('east', 'East'), ('west', 'West')]
     )
-    total_area = fields.Integer(compute="_total_area")
+    total_area = fields.Integer(compute="_compute_total_area")
 
     active = fields.Boolean(default=True)
     state = fields.Selection(
@@ -45,6 +45,7 @@ class EstateProperty(models.Model):
     offer_ids = fields.One2many("estate.property.offer", "property_id", string="Offers")
 
     @api.depends('garden_area', 'living_area')
-    def _total_area(self):
+    def _compute_total_area(self):
         for record in self:
             record.total_area = record.garden_area + record.living_area
+    

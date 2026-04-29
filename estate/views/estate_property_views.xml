@@ -66,7 +66,7 @@
                                 <field name="garden" />
                                 <field name="garden_area" string="Garden Area (sqm)" />
                                 <field name="garden_orientation"/>
-                                <field name="total_area" readonly="1" string="Total Area (sqm)"/>
+                                <field name="total_area" string="Total Area (sqm)"/>
                             </group>
                         </page>
                         <page string="Offers">
