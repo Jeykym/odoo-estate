@@ -1,4 +1,4 @@
-from odoo import fields, models, api
+from odoo import fields, models, api, exceptions
 from datetime import timedelta
 
 class EstatePropertyOffer(models.Model):

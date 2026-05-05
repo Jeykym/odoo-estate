@@ -1,4 +1,4 @@
-from odoo import fields, models, api
+from odoo import fields, models, api, exceptions
 from datetime import datetime
 from dateutil.relativedelta import relativedelta
 
@@ -50,6 +50,13 @@ class EstateProperty(models.Model):
         'CHECK(selling_price >= 0)',
         'Selling price must be non-negative'
     )
+
+
+    @api.constrains('selling_price', 'expected_price')
+    def _check_selling_price_validity(self):
+        for record in self:
+            if record.selling_price != 0 and record.selling_price < record.expected_price * 0.9:
+                raise exceptions.ValidationError("Selling price cannot be less than 90% of the expected price")
 
     @api.depends('garden_area', 'living_area')
     def _compute_total_area(self):
