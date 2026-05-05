@@ -5,6 +5,7 @@ from dateutil.relativedelta import relativedelta
 class EstateProperty(models.Model):
     _name = "estate.property"
     _description = "For the odoo tutorial"
+    _order = "id desc"
 
     name = fields.Char(required=True)
     description = fields.Text()

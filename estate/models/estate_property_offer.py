@@ -4,6 +4,7 @@ from datetime import timedelta
 class EstatePropertyOffer(models.Model):
     _name = "estate.property.offer"
     _description = "For the odoo tutorial"
+    _order = "price desc"
 
     price = fields.Float(required=True)
     status = fields.Selection(
