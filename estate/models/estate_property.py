@@ -42,6 +42,15 @@ class EstateProperty(models.Model):
 
     offer_ids = fields.One2many("estate.property.offer", "property_id", string="Offers")
 
+    _check_expected_price = models.Constraint(
+        'CHECK(expected_price >= 0)',
+        'Expected price must be non-negative'
+    )
+    _check_selling_price = models.Constraint(
+        'CHECK(selling_price >= 0)',
+        'Selling price must be non-negative'
+    )
+
     @api.depends('garden_area', 'living_area')
     def _compute_total_area(self):
         for record in self:

@@ -5,3 +5,8 @@ class EstatePropertyType(models.Model):
     _description = "For the odoo tutorial"
 
     name = fields.Char(required=True)
+    
+    _check_name = models.Constraint(
+        'UNIQUE(name)',
+        "Type's name must be unique"
+    )

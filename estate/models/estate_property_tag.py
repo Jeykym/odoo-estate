@@ -5,3 +5,8 @@ class EstatePropertyTag(models.Model):
     _description = "For the odoo tutorial"
 
     name = fields.Char(required=True)
+
+    _check_name = models.Constraint(
+        'UNIQUE(name)',
+        "Tag's name must be unique"
+    )
