@@ -24,7 +24,7 @@ class EstateProperty(models.Model):
     total_area = fields.Integer(compute="_compute_total_area")
 
     active = fields.Boolean(default=True)
-    state = fields.Selection(
+    status = fields.Selection(
         selection=[
             ('new', 'New'),
             ('sold', 'Sold'),
