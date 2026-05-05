@@ -11,7 +11,7 @@
                 <field name="living_area" />
                 <field name="facades" />
 
-                <filter string="Available" name="available" domain="['|', ('status', '=', 'available'), ('status', '=', 'offer received')]"/>
+                <filter string="Available" name="available" domain="['|', ('state', '=', 'available'), ('state', '=', 'offer received')]"/>
 
                 <filter string="Postcode" name="postcode" context="{'group_by':'postcode'}"/>
             </search>
@@ -44,12 +44,12 @@
                             type="object"
                             string="Sold"
                             class="btn-primary"
-                            invisible="status in ('sold', 'cancelled')"/>
+                            invisible="state in ('sold', 'cancelled')"/>
                     <button name="action_cancel"
                             type="object"
                             string="Cancel"
                             class="btn-secondary"
-                            invisible="status in ('sold', 'cancelled')"/>
+                            invisible="state in ('sold', 'cancelled')"/>
                 </header>
                 <sheet>
                     <div class="oe_title">
@@ -57,9 +57,7 @@
                             <field name="name" />
                         </h1>
                     </div>
-                    <group>
-                        <field name="status" />
-                    </group>
+                    <field name="state" widget="statusbar" statusbar_visible="new,offer_received,sold" />
 
                     <group>
                         <group>

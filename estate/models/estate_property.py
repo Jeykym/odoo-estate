@@ -24,15 +24,19 @@ class EstateProperty(models.Model):
     total_area = fields.Integer(compute="_compute_total_area")
 
     active = fields.Boolean(default=True)
-    status = fields.Selection(
+    state = fields.Selection(
         selection=[
             ('new', 'New'),
+            ('offer_received', 'Offer Received'),
             ('sold', 'Sold'),
             ('cancelled', 'Cancelled')
         ],
         required=True,
         copy=False,
-        default='new'
+        default='new',
+        compute="_copmute_state",
+        store=True,
+        readonly=False
     )
 
     seller_id = fields.Many2one("res.users", string="Seller", default=lambda self: self.env.user)
@@ -62,6 +66,12 @@ class EstateProperty(models.Model):
     def _compute_total_area(self):
         for record in self:
             record.total_area = record.garden_area + record.living_area
+    
+    @api.depends('offer_ids')
+    def _copmute_state(self):
+        for record in self:
+            if record.offer_ids and record.state == 'new':
+                record.state = 'offer_received'
     
     @api.onchange('garden')
     def _onchange_garden(self):
