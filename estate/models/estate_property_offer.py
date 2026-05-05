@@ -25,3 +25,28 @@ class EstatePropertyOffer(models.Model):
     def _inverse_date_deadline(self):
         for record in self:
             record.validity = (record.date_deadline - record.create_date).days
+    
+
+    def action_accept(self):
+        if self.status == 'pending' and self.property_id.state != 'sold':
+            self.status = 'accepted'
+            self.property_id.state = 'sold'
+            self.property_id.selling_price = self.price
+            self.property_id.buyer_id = self.partner_id
+            
+            return True
+
+        return False
+
+    def action_refuse(self):
+        if self.status == 'pending':
+            self.status = 'refused'
+            return True
+
+        return False
+
+    def action_cancel(self):
+        self.status = 'pending'
+        self.property_id.selling_price = 0
+        self.property_id.buyer_id = False
+        self.property_id.state = 'new'

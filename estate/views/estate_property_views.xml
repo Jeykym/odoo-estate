@@ -87,7 +87,27 @@
                         </page>
                         <page string="Offers">
                             <group>
-                                <field name="offer_ids" />
+                                <field name="offer_ids">
+                                    <list string="Offers">
+                                        <field name="price" />
+                                        <field name="partner_id" />
+                                        <button name="action_accept"
+                                                type="object"
+                                                string="Accept"
+                                                class="btn-success"/>
+                                        <button name="action_refuse"
+                                                type="object"
+                                                string="Refuse"
+                                                class="btn-danger"/>  
+                                        <button name="action_cancel"
+                                                type="object"
+                                                string="Cancel"
+                                                class="btn-secondary"/>
+                                        <field name="status" />
+                                        <field name="validity" />
+                                        <field name="date_deadline" string="Deadline"/>
+                                    </list>
+                                </field>
                             </group>
                         </page>
                         <page string="Other Info">
