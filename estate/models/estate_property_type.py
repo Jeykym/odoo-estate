@@ -7,7 +7,7 @@ class EstatePropertyType(models.Model):
 
     name = fields.Char(required=True)
     
-    property_ids = fields.One2many("estate.property", "property_type_id", string="Properties")
+    property_ids = fields.One2many("estate.property", "type_id", string="Properties")
 
     sequence  = fields.Integer('Sequence', default=1, help="Used to order the types, the lower the better")
     
