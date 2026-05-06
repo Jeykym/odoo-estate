@@ -61,7 +61,7 @@
                             <field name="name" />
                         </h1>
                     </div>
-                    <field name="tag_ids" widget="many2many_tags" options="{'no_create': True, 'color_field': 'color'}" />
+                    <field name="tag_ids" widget="many2many_tags" options="{'color_field': 'color'}" />
                     <group>
                         <group>
                             <field name="postcode" />
