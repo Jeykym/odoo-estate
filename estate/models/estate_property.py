@@ -29,6 +29,7 @@ class EstateProperty(models.Model):
         selection=[
             ('new', 'New'),
             ('offer_received', 'Offer Received'),
+            ('offer_accepted', 'Offer Accepted'),
             ('sold', 'Sold'),
             ('cancelled', 'Cancelled')
         ],
@@ -87,7 +88,7 @@ class EstateProperty(models.Model):
             self.garden_orientation = False
 
     def action_sold(self):
-        if self.state != 'cancelled':
+        if self.state == 'offer_accepted':
             self.state = 'sold'
             return True
         else:
