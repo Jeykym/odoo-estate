@@ -24,7 +24,6 @@
         <field name="arch" type="xml">
             <list string="Properties">
                 <field name="name" />
-                # isn't editable for some reason
                 <field name="tag_ids" widget="many2many_tags" options="{'color_field': 'color'}" />
                 <field name="postcode" />
                 <field name="bedrooms" />
