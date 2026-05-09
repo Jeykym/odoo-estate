@@ -19,7 +19,7 @@ class EstatePropertyOffer(models.Model):
 
     property_type_id = fields.Many2one(
         related="property_id.type_id",
-        stored=True
+        store=True
     )
 
     _check_price = models.Constraint(
