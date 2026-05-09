@@ -95,7 +95,7 @@
                         <page string="Offers">
                             <group>
                                 <field name="offer_ids">
-                                    <list>
+                                    <list editable="bottom">
                                         <field name="price" />
                                         <field name="partner_id" />
                                         <button name="action_accept"
