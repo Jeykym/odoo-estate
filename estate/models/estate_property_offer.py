@@ -61,3 +61,14 @@ class EstatePropertyOffer(models.Model):
         self.property_id.selling_price = 0
         self.property_id.buyer_id = False
         self.property_id.state = 'new'
+
+    @api.model
+    def create(self, vals):
+        target_property = self.env['estate.property'].browse(vals[0]['property_id'])
+        if target_property.offer_ids:
+            min_offer = min(target_property.offer_ids.mapped('price'))
+            if vals[0]['price'] < min_offer:
+                raise exceptions.ValidationError("New offer's price must be equal to or higher than existing offers.")
+        if target_property.state == 'new':
+            target_property.state = 'offer_received'
+        return super().create(vals)

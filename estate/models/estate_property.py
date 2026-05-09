@@ -72,12 +72,6 @@ class EstateProperty(models.Model):
         for record in self:
             record.total_area = record.garden_area + record.living_area
     
-    @api.depends('offer_ids')
-    def _copmute_state(self):
-        for record in self:
-            if record.offer_ids and record.state == 'new':
-                record.state = 'offer_received'
-    
     @api.onchange('garden')
     def _onchange_garden(self):
         if self.garden:
