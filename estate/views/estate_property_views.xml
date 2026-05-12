@@ -4,17 +4,21 @@
         <field name="model">estate.property</field>
         <field name="arch" type="xml">
             <search string="Search properties">
-                <field name="name" />
-                <field name="postcode" />
-                <field name="expected_price" />
-                <field name="bedrooms" />
+                <field name="name"/>
+                <field name="postcode"/>
+                <field name="expected_price"/>
+                <field name="bedrooms"/>
                 <field name="living_area" filter_domain="[('living_area', '>=', self)]"/>
-                <field name="facades" />
+                <field name="facades"/>
 
-                <filter string="Available" name="available" domain="['|', ('state', '=', 'new'), ('state', '=', 'offer_received')]"/>
+                <filter string="Available"
+                        name="available"
+                        domain="['|', ('state', '=', 'new'), ('state', '=', 'offer_received')]"/>
 
-                <filter string="Postcode" name="postcode" context="{'group_by':'postcode'}"/>
-                </search>
+                <filter string="Postcode"
+                        name="postcode"
+                        context="{'group_by':'postcode'}"/>
+            </search>
         </field>
     </record>
 
@@ -22,8 +26,10 @@
         <field name="name">estate.property.kanban</field>
         <field name="model">estate.property</field>
         <field name="arch" type="xml">
-            <kanban default_group_by="type_id" records_draggable="False" groups_draggable="False">
-                <field name="state" />
+            <kanban default_group_by="type_id"
+                    records_draggable="False" 
+                    groups_draggable="False">
+                <field name="state"/>
                 <templates>
                     <t t-name="card">
                         <div>
@@ -34,18 +40,20 @@
                             </div>
                             <div>
                                 <span>Expected Price: </span>
-                                <field name="expected_price" />
+                                <field name="expected_price"/>
                             </div>
                             <div t-if="record.state.raw_value == 'offer_received'">
                                 <span>Best Price: </span>
-                                <field name="best_price" />
+                                <field name="best_price"/>
                             </div>
                             <div t-if="record.state.raw_value == 'offer_accepted'">
                                 <span>Selling Price: </span>
-                                <field name="selling_price" />
+                                <field name="selling_price"/>
                             </div>
                             <div>
-                                <field name="tag_ids" widget="many2many_tags" options="{'color_field': 'color'}" />
+                                <field name="tag_ids"
+                                       widget="many2many_tags"
+                                       options="{'color_field': 'color'}"/>
                             </div>
                             <div t-if="record.state.raw_value == 'new'">
                                 <span class="badge badge-secondary text-danger">New</span>
@@ -53,7 +61,6 @@
                         </div>
                     </t>
                 </templates>
-                <!-- <filter string="Type" name="groupby_type" context="{'group_by':'type_id'}"/> -->
             </kanban>
         </field>
     </record>
@@ -66,8 +73,7 @@
                 <header>
                     <group>
                         <button name="action_sold"
-                                type="object"
-                                string="Sold"
+                                type="object" string="Sold"
                                 class="btn-primary"
                                 invisible="state in ('sold', 'cancelled')"/>
                         <button name="action_cancel"
@@ -76,72 +82,81 @@
                                 class="btn-secondary"
                                 invisible="state in ('sold', 'cancelled')"/>
                     </group>
-                    <field name="state" widget="statusbar" statusbar_visible="new,offer_received,offer_accepted,sold" />
+
+                    <field name="state"
+                           widget="statusbar"
+                           statusbar_visible="new,offer_received,offer_accepted,sold"/>
                 </header>
+
                 <sheet>
                     <div class="oe_title">
                         <h1>
-                            <field name="name" />
+                            <field name="name"/>
                         </h1>
                     </div>
-                    <field name="tag_ids" widget="many2many_tags" options="{'color_field': 'color'}" />
+                    <field name="tag_ids"
+                           widget="many2many_tags"
+                           options="{'color_field': 'color'}"/>
                     <group>
                         <group>
-                            <field name="postcode" />
-                            <field name="date_available" string="Available From" />
+                            <field name="postcode"/>
+                            <field name="date_available" string="Available From"/>
                         </group>
                         <group>
-                            <field name="expected_price" />
-                            <field name="selling_price" />
+                            <field name="expected_price"/>
+                            <field name="selling_price"/>
                         </group>
                     </group>
                     <notebook>
                         <page string="Description">
                             <group>
-                                <field name="bedrooms" />
-                                <field name="description" />
-                                <field name="living_area" />
-                                <field name="facades" />
-                                <field name="garage" />
-                                <field name="garden" />
+                                <field name="bedrooms"/>
+                                <field name="description"/>
+                                <field name="living_area"/>
+                                <field name="facades"/>
+                                <field name="garage"/>
+                                <field name="garden"/>
                                 <field name="garden_area"
                                        string="Garden Area (sqm)"
-                                       invisible="garden == False" />
+                                       invisible="garden == False"/>
                                 <field name="garden_orientation"
-                                       invisible="garden == False" />
-                                <field name="total_area" string="Total Area (sqm)"/>
+                                       invisible="garden == False"/>
+                                <field name="total_area"
+                                       string="Total Area (sqm)"/>
                             </group>
                         </page>
+
                         <page string="Offers">
                             <group>
                                 <field name="offer_ids">
                                     <list editable="bottom">
-                                        <field name="price" />
-                                        <field name="partner_id" />
+                                        <field name="price"/>
+                                        <field name="partner_id"/>
                                         <button name="action_accept"
                                                 type="object"
                                                 string="Accept"
-                                                class="btn-success" />
+                                                class="btn-success"/>
                                         <button name="action_refuse"
                                                 type="object"
                                                 string="Refuse"
-                                                class="btn-danger" />  
+                                                class="btn-danger"/>
                                         <button name="action_cancel"
                                                 type="object"
                                                 string="Cancel"
-                                                class="btn-secondary" />
-                                        <field name="status" />
-                                        <field name="validity" />
+                                                class="btn-secondary"/>
+                                        <field name="status"/>
+                                        <field name="validity"/>
                                         <field name="date_deadline" string="Deadline"/>
                                     </list>
                                 </field>
                             </group>
                         </page>
+
                         <page string="Other Info">
                             <group>
-                                <field name="seller_id" />
-                                <field name="buyer_id" />
-                                <field name="type_id" options="{'no_create': True}" />
+                                <field name="seller_id"/>
+                                <field name="buyer_id"/>
+                                <field name="type_id" options="{'no_create': True}"/>
                             </group>
                         </page>
                     </notebook>
