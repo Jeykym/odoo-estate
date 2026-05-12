@@ -39,22 +39,24 @@ class EstatePropertyOffer(models.Model):
     
 
     def action_accept(self):
-        if self.status == 'pending' and self.property_id.state != 'offer_accepted':
-            self.status = 'accepted'
-            self.property_id.state = 'offer_accepted'
-            self.property_id.selling_price = self.price
-            self.property_id.buyer_id = self.partner_id
-            
-            return True
+        if self.status != 'pending':
+            return False
 
-        return False
+        self.status = 'accepted'
+        self.property_id.state = 'offer_accepted'
+        self.property_id.selling_price = self.price
+        self.property_id.buyer_id = self.partner_id
+        
+        return True
 
     def action_refuse(self):
-        if self.status == 'pending':
-            self.status = 'refused'
-            return True
+        if self.status != 'pending':
+            return False
 
-        return False
+        self.status = 'refused'
+
+        return True
+
 
     @api.model
     def create(self, vals):
