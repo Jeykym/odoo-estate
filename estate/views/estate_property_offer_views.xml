@@ -3,13 +3,26 @@
         <field name="name">estate.property.offer.list</field>
         <field name="model">estate.property.offer</field>
         <field name="arch" type="xml">
-            <list string="Property Offer">
-                <field name="price" />
-                <field name="partner_id" />
-                <field name="status" />
-                <field name="validity" />
+            <list editable="bottom"
+                  decoration-muted="status == 'refused'"
+                  decoration-success="status == 'accepted'">
+                <field name="price"/>
+                <field name="partner_id"/>
+                <button name="action_accept"
+                        type="object"
+                        string="Accept"
+                        class="btn-success"/>
+                <button name="action_refuse"
+                        type="object"
+                        string="Refuse"
+                        class="btn-danger"/>
+                <button name="action_cancel"
+                        type="object"
+                        string="Cancel"
+                        class="btn-secondary"/>
+                <field name="status"/>
+                <field name="validity"/>
                 <field name="date_deadline" string="Deadline"/>
-                <field name="property_id" />
             </list>
         </field>
     </record>
