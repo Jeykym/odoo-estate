@@ -56,12 +56,6 @@ class EstatePropertyOffer(models.Model):
 
         return False
 
-    def action_cancel(self):
-        self.status = 'pending'
-        self.property_id.selling_price = 0
-        self.property_id.buyer_id = False
-        self.property_id.state = 'new'
-
     @api.model
     def create(self, vals):
         target_property = self.env['estate.property'].browse(vals[0]['property_id'])
